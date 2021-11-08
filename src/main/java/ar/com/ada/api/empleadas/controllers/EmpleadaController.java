@@ -1,4 +1,3 @@
-  
 package ar.com.ada.api.empleadas.controllers;
 
 import java.math.BigDecimal;
@@ -48,55 +47,58 @@ public class EmpleadaController {
 
         respuesta.isOk = true;
         respuesta.id = empleada.getEmpleadaId();
-        respuesta.message = "La empleada fue creada con exito";
+        respuesta.message = "El empleado fue agregado con exito";
         return ResponseEntity.ok(respuesta);
 
     }
 
-    //no puede haber dos metodos con la misma ruta entonces al ya usar /empleados arriba se especifica
-    //path variable
-    @GetMapping ("/empleados/{id}")
-    public ResponseEntity<Empleada> getEmpleadaPorId (@PathVariable Integer id){
+    // no puede haber dos metodos con la misma ruta entonces al ya usar /empleados
+    // arriba se especifica
+    // path variable
+    @GetMapping("/empleados/{id}")
+    public ResponseEntity<Empleada> getEmpleadaPorId(@PathVariable Integer id) {
         Empleada empleada = service.buscarEmpleada(id);
 
         return ResponseEntity.ok(empleada);
-    } 
+    }
 
-    //Detele/empleados/{id} --> Da de baja un empleado poniendo el campo estado en "baja"
+    // Detele/empleados/{id} --> Da de baja un empleado poniendo el campo estado en
+    // "baja"
     // y la fecha de baja que sea el dia actual.
     @DeleteMapping("/empleados/{id}")
-    public ResponseEntity<GenericResponse> bajaEmpleada(@PathVariable Integer id){
+    public ResponseEntity<GenericResponse> bajaEmpleada(@PathVariable Integer id) {
 
         service.bajaEmpleadaPorId(id);
 
         GenericResponse respuesta = new GenericResponse();
 
         respuesta.isOk = true;
-        respuesta.message = "La empleada fue dada de baja con exito";
+        respuesta.message = "El empleado fue dado de baja con exito";
 
         return ResponseEntity.ok(respuesta);
 
     }
 
-    //Get /empleados/categorias/{catId} --> Obtiene la lista de empleados de una categoria.
+    // Get /empleados/categorias/{catId} --> Obtiene la lista de empleados de una
+    // categoria.
     @GetMapping("/empleados/categorias/{catId}")
-    public ResponseEntity<List<Empleada>> obtenerEmpleadasPorCategoria(@PathVariable Integer catId){
-        
+    public ResponseEntity<List<Empleada>> obtenerEmpleadasPorCategoria(@PathVariable Integer catId) {
+
         List<Empleada> empleadas = service.traerEmpleadaPorCategoria(catId);
         return ResponseEntity.ok(empleadas);
     }
 
-    @PutMapping ("/empleados/{id}/sueldos")
-    public ResponseEntity<GenericResponse> modificarSueldo(@PathVariable Integer id, @RequestBody SueldoNuevoEmpleada sueldoNuevoInfo){
-        
+    @PutMapping("/empleados/{id}/sueldos")
+    public ResponseEntity<GenericResponse> modificarSueldo(@PathVariable Integer id,
+            @RequestBody SueldoNuevoEmpleada sueldoNuevoInfo) {
+
         service.modificarSueldo(id, sueldoNuevoInfo);
         GenericResponse respuesta = new GenericResponse();
-        
+
         respuesta.isOk = true;
-        respuesta.message ="El sueldo ha sido actualizado";
+        respuesta.message = "El sueldo ha sido actualizado";
 
         return ResponseEntity.ok(respuesta);
     }
-
 
 }

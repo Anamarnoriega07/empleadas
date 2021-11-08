@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import ar.com.ada.api.empleadas.entities.Categoria;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
+public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
- Categoria findByCategoriaId(Integer categoriaId);
-    
+    Categoria findByCategoriaId(Integer categoriaId);
+
 }

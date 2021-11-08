@@ -12,17 +12,16 @@ import ar.com.ada.api.empleadas.services.CategoriaService;
 
 @RestController
 public class CategoriaController {
-    
+
     @Autowired
     private CategoriaService service;
 
-    @PostMapping("/categorias") //Ningun web method devuelve void
-    public ResponseEntity<?> crearCategoria(@RequestBody Categoria categoria){
-        
+    @PostMapping("/categorias") // Ningun web method devuelve void
+    public ResponseEntity<?> crearCategoria(@RequestBody Categoria categoria) {
+
         GenericResponse respuesta = new GenericResponse();
 
-        
-        service.crearCategoria(categoria); 
+        service.crearCategoria(categoria);
 
         respuesta.isOk = true;
         respuesta.id = categoria.getCategoriaId();
@@ -32,10 +31,10 @@ public class CategoriaController {
 
     }
 
-    //GET /categorias
-    @GetMapping("/categorias") //hacer el mapping
-    public ResponseEntity<List<Categoria>> traerCategorias (){ //return Response Entity
-        return ResponseEntity.ok(service.traerCategorias()); //return entity con el valor esperado
+    // GET /categorias
+    @GetMapping("/categorias") // hacer el mapping
+    public ResponseEntity<List<Categoria>> traerCategorias() { // return Response Entity
+        return ResponseEntity.ok(service.traerCategorias()); // return entity con el valor esperado
     }
 
 }
