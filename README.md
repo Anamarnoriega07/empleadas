@@ -1,4 +1,4 @@
-# empleadas
+# Empleadas
 API REST sobre un sistema de nomina de empleados, en el cual se puede:
 
 - Crear un Empleado, es decir, cargar los datos para darlo de alta en la nomina, asignandole cargo y sueldo.
