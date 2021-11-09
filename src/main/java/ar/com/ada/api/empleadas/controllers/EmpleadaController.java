@@ -41,15 +41,23 @@ public class EmpleadaController {
 
     @PostMapping("/empleados")
     public ResponseEntity<?> crearEmpleada(@RequestBody InfoEmpleadaNueva empleadaInfo) {
-
-        Empleada empleada = service.crearEmpleada(empleadaInfo);
         GenericResponse respuesta = new GenericResponse();
 
+        Empleada empleada = new Empleada();
+        empleada.setNombre(empleadaInfo.nombre);
+        empleada.setEdad(empleadaInfo.edad);
+        empleada.setSueldo(empleadaInfo.sueldo);
+        empleada.setFechaAlta(new Date());
+        
+        Categoria categoria = categoriaService.buscarCategoria(empleadaInfo.categoriaId);
+        empleada.setCategoria(categoria);
+        empleada.setEstado(EstadoEmpleadaEnum.ACTIVO);
+
+        service.crearEmpleada(empleada);
         respuesta.isOk = true;
         respuesta.id = empleada.getEmpleadaId();
-        respuesta.message = "El empleado fue agregado con exito";
+        respuesta.message = "El empleado fue cargado con exito";
         return ResponseEntity.ok(respuesta);
-
     }
 
     // no puede haber dos metodos con la misma ruta entonces al ya usar /empleados
@@ -66,7 +74,7 @@ public class EmpleadaController {
     // "baja"
     // y la fecha de baja que sea el dia actual.
     @DeleteMapping("/empleados/{id}")
-    public ResponseEntity<GenericResponse> bajaEmpleada(@PathVariable Integer id) {
+    public ResponseEntity<?> bajaEmpleada(@PathVariable Integer id) {
 
         service.bajaEmpleadaPorId(id);
 

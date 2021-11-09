@@ -55,6 +55,10 @@ public class CategoriaService {
 
     }
     
+    
+    public void eliminarCategoria(Integer categoriaId) {
+        repo.deleteById(categoriaId);
+    }
 }
 
 
